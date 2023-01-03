@@ -1,0 +1,10 @@
+[CmdletBinding()]
+Param(
+    [Parameter(Mandatory=$True)][string]$acc
+ )
+echo "User $acc will be added"
+$group = Gwmi win32_group -Filter "Domain='$env:computername' and SID='S-1-5-32-544'" 
+$adm = $group.Name
+
+
+net localgroup $adm $acc /add
